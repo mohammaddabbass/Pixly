@@ -6,7 +6,10 @@ const createWindow = () => {
     height: 600
   })
 
-  win.loadURL('http://localhost:5173')
+  // for development
+  win.loadURL('http://localhost:5173');
+  // for production
+  // win.loadFile('C:/Users/User/Desktop/Pixly/frontend/dist/index.html');
 }
 
 app.whenReady().then(() => {
