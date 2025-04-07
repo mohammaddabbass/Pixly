@@ -1,0 +1,61 @@
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1000;
+    backdrop-filter: blur(2px);
+  }
+  
+  .delete-modal {
+    background: var(--color-primary-bg);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: var(--sahdow-lg);
+    animation: modalSlideIn 0.3s ease;
+  }
+  
+  .modal-header {
+    margin-bottom: 1.5rem;
+  }
+  
+  .modal-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+  
+  
+  .modal-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+  }
+  
+  @keyframes modalSlideIn {
+    from {
+      transform: translateY(20px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .delete-modal {
+      padding: 1.5rem;
+    }
+    
+    .modal-actions {
+      flex-direction: column;
+    }
+    
+    .btn {
+      width: 100%;
+    }
+  }
