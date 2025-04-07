@@ -3,10 +3,11 @@
     left: 0;
     right: 0;
     height: auto;
-    background: var(--ios-system-background);
+    width: 100vw;
+    background: var(--color-primary-bg);
     backdrop-filter: blur(10px);
     padding: 1rem;
-    border-top: 1px solid var(--ios-tertiary-background);
+    border-top: 1px solid var(--color-primary-light);
     text-align: center;
     z-index: 1000;
 }
@@ -14,15 +15,12 @@
 .footer-title {
     font-size: 1rem;
     font-weight: 590;
-    color: var(--ios-label);
 }
 
 .footer-caption {
     font-size: 0.9rem;
-    color: var(--ios-system-blue);
 }
 
 .footer-copyright {
     font-size: 0.8rem;
-    color: var(--ios-tertiary-label);
 }

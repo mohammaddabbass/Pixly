@@ -1,26 +1,43 @@
+// Navbar.jsx
 import React, { useState } from 'react';
+import { Camera } from 'lucide-react';
 import './styles.css';
+import InputGroup from '../InputGroup';
+import Button from '../Button';
+import DeleteModal from '../DeleteModal';
 import UploadModal from '../UploadModal';
 
 const Header = () => {
-  const [modalOpen, setModalOpen] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+
 
   return (
-    <>
-      <UploadModal isOpen={modalOpen} onClose={() => setModalOpen(false)} />
+    <nav className="navbar flex justify-between align-center">
+          {showDeleteModal && (
+      <UploadModal 
+        onClose={() => setShowDeleteModal(false)}
+        onConfirm={() => {
+          // Handle delete logic
+          setShowDeleteModal(false);
+        }}
+      />
+    )}
+      <div className="navbar-left flex align-center">
+        <Camera color="#9B72E8" size={30} />
+        <div className="logo">Pixly</div>
 
-      <nav className="header flex align-center">
-        <div className="header-content flex align-center justify-between">
-          <div className="header-title">Trackify</div>
-          <div className="nav-buttons flex justify-between align-center ">
-            <button className="nav-button">Dashboard</button>
-            <button className="nav-button" onClick={() => setModalOpen(true)}>Upload</button>
-            <button className="nav-button" style={{ color: '#86868b' }}>•••</button>
-          </div>
-        </div>
-      </nav>
-    </>
+      </div>
+        <button className="nav-link">Home</button>
+
+        <InputGroup type={'text'} placeholder={"Search images..."}/>
+
+      <div className="navbar-right flex align-center">
+        <Button buttonText={"Upload"} onClick={() => setShowDeleteModal(true)}/>
+        <div className="user-avatar flex align-center justify-center">MA</div>
+      </div>
+    </nav>
   );
-};  
+};
 
 export default Header;

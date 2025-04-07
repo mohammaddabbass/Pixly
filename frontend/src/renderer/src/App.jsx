@@ -1,5 +1,6 @@
-import AuthPage from "./pages/AuthPage"
+import Auth from "./pages/Auth"
 import { Route, Routes } from 'react-router-dom'
+import Home from "./pages/Home"
 
 
 function App() {
@@ -8,7 +9,7 @@ function App() {
   return (
     <>
           <Routes>
-          <Route path='/'  element={<AuthPage/>}/>
+          <Route path='/'  element={<Home/>}/>
           </Routes>
     </>
   )
