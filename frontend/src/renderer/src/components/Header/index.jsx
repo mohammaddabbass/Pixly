@@ -5,6 +5,7 @@ import './styles.css';
 import InputGroup from '../InputGroup';
 import Button from '../Button';
 import DeleteModal from '../DeleteModal';
+import UploadModal from '../UploadModal';
 
 const Header = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -14,7 +15,7 @@ const Header = () => {
   return (
     <nav className="navbar flex justify-between align-center">
           {showDeleteModal && (
-      <DeleteModal 
+      <UploadModal 
         onClose={() => setShowDeleteModal(false)}
         onConfirm={() => {
           // Handle delete logic
