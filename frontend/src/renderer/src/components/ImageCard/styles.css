@@ -31,8 +31,7 @@
     position: absolute;
     top: 12px;
     right: 12px;
-    display: flex;
-    gap: 8px;
+    gap: 0.5rem;
     opacity: 0;
     transition: opacity 0.2s ease;
   }
@@ -42,45 +41,36 @@
   }
   
   .action-btn {
-    background: rgba(255, 255, 255, 0.9);
+    background: #ffffffe6;
     border: none;
-    width: 36px;
-    height: 36px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     transition: all 0.2s ease;
-    /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); */
+    padding: 0.75rem;
   }
   
   .action-btn:hover {
-    background: #ffffff;
+    background: var(--color-primary-bg);
     transform: scale(1.1);
   }
   
   .delete-btn:hover {
-    color: #ef4444;
+    color: var(--color-error);
   }
   
   .edit-btn:hover {
-    color: #6d28d9;
+    color: var(--color-success);
   }
   
-  .icon {
-    width: 20px;
-    height: 20px;
-  }
   
   .card-body {
     padding: 1rem;
   }
   
   .image-meta {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     margin-bottom: 0.5rem;
   }
   
@@ -94,11 +84,11 @@
   }
   
   .filesize {
-    color: #6b7280;
+    color: var(--color-gray);
     font-size: 0.875rem;
   }
   
   .image-date {
-    color: #6b7280;
+    color: var(--color-gray);
     font-size: 0.875rem;
   }

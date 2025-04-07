@@ -4,6 +4,7 @@
   box-sizing: border-box;
   font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
   font-family: 'KoHo';
+  overflow-x: hidden;
 }
 
 :root {

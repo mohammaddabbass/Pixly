@@ -12,7 +12,7 @@ const ImageCard = () => {
             alt="Uploaded content" 
             className="card-image"
           />
-          <div className="card-actions">
+          <div className="card-actions flex">
             <button className="action-btn delete-btn">
               <Trash2 size={20} color="#ef4444" />
             </button>
@@ -23,7 +23,7 @@ const ImageCard = () => {
         </div>
 
         <div className="card-body">
-          <div className="image-meta">
+          <div className="image-meta flex justify-between align-center">
             <span className="filename">vacation_photo.jpg</span>
             <span className="filesize">2.4 MB</span>
           </div>
