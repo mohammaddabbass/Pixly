@@ -1,38 +1,66 @@
-.header {
+.navbar {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    height: 4.2rem;
-    background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(10px);
-    padding: 0 1rem;
-    border-bottom: 1px solid var(--ios-tertiary-background);
+    padding: 1rem 2rem;
+    background-color: #ffffff;
+    box-shadow: var(--shadow-sm);
     z-index: 1000;
-}
-
-.header-content {
-    width: 100%;
-    max-width: 80vw;
-    margin: 0 auto;
-}
-
-.header-title {
-    font-size: 1rem;
-    font-weight: 590;
-    color: var(--ios-label);
-}
-
-.nav-buttons {
-    min-width: 40%;
-    gap: 2rem;
-}
-
-.nav-button {
-    background: transparent;
-    color: var(--ios-system-blue);
-}
-
-.nav-button:hover {
-    background: rgba(0, 113, 227, 0.1);
-}
+    border-bottom: 1px solid var(--color-primary-light);
+  }
+  
+  .navbar-left {
+    gap: 0.8rem;
+  }
+  
+  .logo {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--color-primary);
+  }
+  
+  .nav-link {
+    background: none;
+    border: none;
+    color: var(--color-gray);
+    cursor: pointer;
+    transition: color 0.2s ease;
+  }
+  
+  .nav-link:hover {
+    color: var(--color-primary-hover);
+  }
+  
+  .navbar .input-group {
+    margin-bottom: 0;
+    flex-grow: 0.1;
+  }
+  
+  
+  .navbar-right {
+    gap: 1.5rem;
+  }
+  
+  .user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgb(0, 0, 105);
+    color: var(--color-primary-bg);
+    font-weight: 500;
+  }
+  
+  @media (max-width: 768px) {
+    .navbar {
+      padding: 1rem;
+    }
+    
+    .search-bar input {
+      width: 200px;
+    }
+    
+    .upload-btn {
+      padding: 0.6rem 1rem;
+    }
+  }
