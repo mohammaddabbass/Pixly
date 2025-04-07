@@ -1,0 +1,28 @@
+.footer {
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: auto;
+    background: var(--ios-system-background);
+    backdrop-filter: blur(10px);
+    padding: 1rem;
+    border-top: 1px solid var(--ios-tertiary-background);
+    text-align: center;
+    z-index: 1000;
+}
+
+.footer-title {
+    font-size: 1rem;
+    font-weight: 590;
+    color: var(--ios-label);
+}
+
+.footer-caption {
+    font-size: 0.9rem;
+    color: var(--ios-system-blue);
+}
+
+.footer-copyright {
+    font-size: 0.8rem;
+    color: var(--ios-tertiary-label);
+}
