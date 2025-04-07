@@ -1,0 +1,38 @@
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4.2rem;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    padding: 0 1rem;
+    border-bottom: 1px solid var(--ios-tertiary-background);
+    z-index: 1000;
+}
+
+.header-content {
+    width: 100%;
+    max-width: 80vw;
+    margin: 0 auto;
+}
+
+.header-title {
+    font-size: 1rem;
+    font-weight: 590;
+    color: var(--ios-label);
+}
+
+.nav-buttons {
+    min-width: 40%;
+    gap: 2rem;
+}
+
+.nav-button {
+    background: transparent;
+    color: var(--ios-system-blue);
+}
+
+.nav-button:hover {
+    background: rgba(0, 113, 227, 0.1);
+}
