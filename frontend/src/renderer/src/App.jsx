@@ -1,4 +1,4 @@
-import AuthPage from "./pages/AuthPage"
+import Auth from "./pages/Auth"
 import { Route, Routes } from 'react-router-dom'
 
 
@@ -8,7 +8,7 @@ function App() {
   return (
     <>
           <Routes>
-          <Route path='/'  element={<AuthPage/>}/>
+          <Route path='/'  element={<Auth/>}/>
           </Routes>
     </>
   )

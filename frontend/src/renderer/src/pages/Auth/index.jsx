@@ -5,7 +5,7 @@ import useAuth from './useAuth';
 import { useNavigate } from "react-router-dom";
 
 
-const AuthPage = () => {
+const Auth = () => {
   const { user, login, signUp, isLoading, error, token } = useAuth();
   const [isLoginForm, setIsLoginForm] = useState(true);
   const navigate = useNavigate();
@@ -26,6 +26,7 @@ const AuthPage = () => {
 
   return (
     <div className="auth-page flex column justify-center align-center">
+      <h1 className='title'>Pixly</h1>
       <Form
         isLogin={isLoginForm}
         toggleAuthMode={() => setIsLoginForm((prev) => !prev)}
@@ -37,4 +38,4 @@ const AuthPage = () => {
   );
 };
 
-export default AuthPage;
+export default Auth;
