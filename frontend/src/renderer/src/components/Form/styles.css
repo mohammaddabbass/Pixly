@@ -2,9 +2,10 @@
     background: var(--color-primary-bg);
     width: 100%;
     max-width: 400px;
-    border-radius: var(--ios-border-radius-container);
+    border-radius: var(--radius-lg);
     padding: 2.5rem 2rem;
-    box-shadow: var(--ios-shadow-container);
+    box-shadow: var(--shadow-md);
+    border: solid 1px var(--color-gray-light);
 }
 
 .form-header {
@@ -12,9 +13,9 @@
     margin-bottom: 2.1rem;
 }
 
-.header h1 {
+.form-header h1 {
     font-size: 28px;
-    color: var(--ios-label);
+    color: var(--color-primary);
     font-weight: 600;
     margin-bottom: 0.5rem;
 }
@@ -62,10 +63,9 @@
 }
 
 .footer-links a {
-    color: var(--ios-system-blue);
+    color: var(--color-primary);
     text-decoration: none;
     font-size: 14px;
-    display: block;
     margin: 10px 0;
 }
 
