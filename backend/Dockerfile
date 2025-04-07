@@ -18,6 +18,8 @@ WORKDIR /var/www/html
 
 # Copy Laravel app files into container
 COPY . /var/www/html
+RUN sed -i 's|DocumentRoot /var/www/html|DocumentRoot /var/www/html/public|' /etc/apache2/sites-available/000-default.conf
+
 
 # Set permissions (Apache user must access app)
 RUN chown -R www-data:www-data /var/www/html \
@@ -26,5 +28,10 @@ RUN chown -R www-data:www-data /var/www/html \
 # Expose Apache port
 EXPOSE 80
 
+RUN php artisan config:clear \
+ && php artisan config:cache \
+ && php artisan route:cache \
+ && php artisan view:cache || true
+
 # Starts the server
-CMD ["php", "artisan", "serve"]
+CMD ["apache2-foreground"]
