@@ -4,7 +4,7 @@ button {
     justify-content: center;
     height: 44px;
     padding: 0 1.2rem;
-    border-radius: var(--ios-border-radius-element);
+    border-radius: var(--radius-sm);
     font-size: 1rem;
     font-weight: 500;
     cursor: pointer;
@@ -17,23 +17,23 @@ button:hover {
 }
 
 .primary {
-    background: var(--ios-system-blue);
-    color: var(--ios-system-background);
+    background: var(--color-primary);
+    color: var(--color-primary-bg);
 }
 
 .destructive {
-    background: var(--ios-system-red);
-    color: var(--ios-system-background);
+    background: var(--color-error);
+    color: var(--color-primary-bg);
 }
 
 .confirm {
-    background: var(--ios-system-green);
-    color: var(--ios-system-background);
+    background: var(--color-success);
+    color: var(--color-primary-bg);
 }
 
 
 .bordered {
     background: transparent;
-    color: var(--ios-label);
-    border: 1px solid var(--ios-tertiary-background);
+    color: var(--color-primary);
+    border: 1px solid var(--color-primary);
 }
