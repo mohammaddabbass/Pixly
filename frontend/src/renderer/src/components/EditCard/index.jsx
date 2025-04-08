@@ -3,6 +3,7 @@ import './styles.css'
 import Button from '../Button';
 import RotateButton from '../RotateButton';
 import {RotateCcw, RotateCw} from 'lucide-react'
+import ToggleButton from '../toggleButton';
 
 const EditCard = () => {
     return (
@@ -16,6 +17,7 @@ const EditCard = () => {
                     <RotateButton buttonText={<RotateCcw/>}/> 
                     <RotateButton buttonText={<RotateCw />}/> 
                 </div>
+                <ToggleButton/>
                 <div className="edit-buttons flex justify-between">
                     <Button variant='cancel' buttonText={'Cancel'}/>
                     <Button buttonText={'Save'}/>
