@@ -32,3 +32,7 @@
 .edit-buttons button {
     width: 45%;
 }
+
+.rotate-buttons {
+    gap: 1rem;
+}
