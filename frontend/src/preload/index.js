@@ -19,7 +19,7 @@ if (process.contextIsolated) {
 }
 
 contextBridge.exposeInMainWorld('electronAPI', {
-  saveImage: (fileData) => ipcRenderer.send('save-image', fileData),
+  saveImage: (data) => ipcRenderer.invoke('save-image', data),
   getSavedImages: () => ipcRenderer.invoke('get-saved-images'),
   deleteImage: (path) => ipcRenderer.invoke('delete-image', path),
 

@@ -78,22 +78,35 @@ app.on('window-all-closed', () => {
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-ipcMain.on('save-image', (event, { name, buffer }) => {
+ipcMain.handle('save-image', async (event, { name, buffer }) => {
   const destFolder = path.join(app.getPath('pictures'), 'Pixly');
-
+  
   if (!fs.existsSync(destFolder)) {
     fs.mkdirSync(destFolder, { recursive: true });
   }
 
   const destPath = path.join(destFolder, name);
-
-  fs.writeFile(destPath, Buffer.from(buffer), (err) => {
-    if (err) {
-      console.error('Failed to save image:', err);
-    } else {
-      console.log('Image saved to', destPath);
-    }
-  });
+  
+  try {
+    await fs.promises.writeFile(destPath, Buffer.from(buffer));
+    const stats = await fs.promises.stat(destPath);
+    
+    // Return the full image data
+    const imageBuffer = await fs.promises.readFile(destPath);
+    const base64 = imageBuffer.toString('base64');
+    const ext = path.extname(destPath).slice(1);
+    
+    return {
+      name,
+      path: destPath,
+      src: `data:image/${ext};base64,${base64}`,
+      size: (stats.size / (1024 * 1024)).toFixed(2),
+      createdAt: stats.birthtime
+    };
+  } catch (err) {
+    console.error('Save failed:', err);
+    throw err;
+  }
 });
 
 

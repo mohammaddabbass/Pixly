@@ -9,7 +9,7 @@ import { setLoading, setImages, removeImage } from '../../../features/imageSlice
 
 const Home = () => {
   const dispatch = useDispatch();
-  const images = useSelector((global) => global.imageSlice);
+  const { images } = useSelector((state) => state.images);
 
   const fetchImages = async () => {
     dispatch(setLoading());
@@ -19,13 +19,14 @@ const Home = () => {
   };
 
   useEffect(() => {
+    console.log("hello")
     fetchImages();
   }, []);
 
   const handleDelete = async (imagePath) => {
     const res = await window.electronAPI.deleteImage(imagePath);
     if (res.success) {
-      dispatch(removeImage({ path: imagePath })); // Pass object with path property
+      dispatch(removeImage({ path: imagePath }));
     } else {
       console.error(res.error);
     }

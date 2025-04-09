@@ -29,10 +29,10 @@ export const imageSlice = createSlice({
         // Action to add a new image
         addImage: (state, action) => {
           const newImage = action.payload;
-          const updated = [...state.images, newImage];
+          const updated = [newImage, ...state.images ];
 
           return {
-            ...state,
+            ...state,   
             loading: false,
             images: updated
           }
