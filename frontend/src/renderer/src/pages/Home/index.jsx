@@ -10,6 +10,7 @@ import { setLoading, setImages, removeImage } from '../../../features/imageSlice
 const Home = () => {
   const dispatch = useDispatch();
   const { images } = useSelector((state) => state.images);
+  const [searchTerm, setSearchTerm] = useState('');
 
   const fetchImages = async () => {
     dispatch(setLoading());
@@ -33,11 +34,16 @@ const Home = () => {
   };
 
 
+  const filteredImages = images.filter(image => 
+    image.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+
   return (
     <div className="page flex column">
-      <Header />
+      <Header Header searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
       <div className="page-content image-gallery">
-        {images.map((img, idx) => (
+        {filteredImages?.map((img, idx) => (
           <ImageCard
             key={idx}
             src={img.src}

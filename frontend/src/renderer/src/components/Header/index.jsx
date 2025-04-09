@@ -6,11 +6,12 @@ import Button from '../Button';
 import UploadModal from '../UploadModal';
 import { useDispatch, useSelector } from 'react-redux';
 import { setLoading, setImages, addImage } from '../../../features/imageSlice';
+import { useNavigate } from 'react-router-dom';
 
 
-const Header = () => {
+const Header = ({ searchTerm, setSearchTerm }) => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [searchTerm, setSearchTerm] = useState('');
   const [showUploadModal, setShowUploadModal] = useState(false);
   const { images, loading } = useSelector((state) => state.images);  // ensure you use the correct key
   const [selectedFile, setSelectedFile] = useState(null);
@@ -63,6 +64,12 @@ const Header = () => {
       fetchImages();
     }, [dispatch]);
 
+    const handleSearchChange = (e) => {
+      setSearchTerm(e.target.value.toLowerCase());
+    };
+  
+
+
   return (
     <nav className="navbar flex justify-between align-center">
           {showUploadModal && (
@@ -77,9 +84,12 @@ const Header = () => {
         <div className="logo">Pixly</div>
 
       </div>
-        <button className="nav-link">Home</button>
+        <button className="nav-link" onClick={navigate('/')}>Home</button>
 
-        <InputGroup type={'text'} placeholder={"Search images..."}/>
+        <InputGroup type="text" 
+        placeholder="Search images..."
+        value={searchTerm}
+        onChange={handleSearchChange}/>
 
       <div className="navbar-right flex align-center">
         <Button buttonText={"Upload"} onClick={() => setShowUploadModal(true)}/>
