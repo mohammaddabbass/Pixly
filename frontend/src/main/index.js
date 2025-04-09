@@ -2,6 +2,9 @@ import { app, shell, BrowserWindow, ipcMain } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
 function createWindow() {
   // Create the browser window.
@@ -72,3 +75,70 @@ app.on('window-all-closed', () => {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+ipcMain.on('save-image', (event, { name, buffer }) => {
+  const destFolder = path.join(app.getPath('pictures'), 'Pixly');
+
+  if (!fs.existsSync(destFolder)) {
+    fs.mkdirSync(destFolder, { recursive: true });
+  }
+
+  const destPath = path.join(destFolder, name);
+
+  fs.writeFile(destPath, Buffer.from(buffer), (err) => {
+    if (err) {
+      console.error('Failed to save image:', err);
+    } else {
+      console.log('Image saved to', destPath);
+    }
+  });
+});
+
+
+ipcMain.handle('get-saved-images', async () => {
+  const folderPath = path.join(app.getPath('pictures'), 'Pixly');
+
+  if (!fs.existsSync(folderPath)) {
+    return [];
+  }
+
+  const files = fs.readdirSync(folderPath);
+
+  const imageFiles = files.filter(file =>
+    /\.(png|jpe?g|gif|bmp|webp)$/i.test(file)
+  );
+
+  const fullImageData = imageFiles.map(file => {
+    const fullPath = path.join(folderPath, file);
+    const stats = fs.statSync(fullPath);
+    const ext = path.extname(fullPath).slice(1);
+    const imageBuffer = fs.readFileSync(fullPath);
+    const base64 = imageBuffer.toString('base64');
+    const src = `data:image/${ext};base64,${base64}`;
+
+    return {
+      name: file,
+      path: fullPath,
+      src,
+      size: (stats.size / (1024 * 1024)).toFixed(2), // in MB
+      createdAt: stats.birthtime, // or stats.ctime
+    };
+  });
+
+  return fullImageData;
+});
+
+
+ipcMain.handle('delete-image', async (event, fullPath) => {
+  try {
+    if (fs.existsSync(fullPath)) {
+      fs.unlinkSync(fullPath);
+      return { success: true };
+    }
+    return { success: false, error: 'File not found' };
+  } catch (err) {
+    return { success: false, error: err.message };
+  }
+});
