@@ -11,16 +11,44 @@ const Header = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [showUploadModal, setShowUploadModal] = useState(false);
 
+  const [selectedFile, setSelectedFile] = useState(null);
+
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      console.log(file);
+      console.log(file.name);
+      setSelectedFile(file);
+    }
+  };
+  
+  const handleUploadConfirm = () => {
+    if (selectedFile) {
+      const reader = new FileReader();
+  
+      reader.onload = function () {
+        const arrayBuffer = reader.result;
+  
+        window.electronAPI.saveImage({
+          name: selectedFile.name,
+          buffer: arrayBuffer
+        });
+  
+        setShowUploadModal(false);
+        setSelectedFile(null);
+      };
+  
+      reader.readAsArrayBuffer(selectedFile); // 👈 this is the magic
+    }
+  };
 
   return (
     <nav className="navbar flex justify-between align-center">
           {showUploadModal && (
       <UploadModal 
         onClose={() => setShowUploadModal(false)}
-        onConfirm={() => {
-          // Handle delete logic
-          setShowUploadModal(false);
-        }}
+        onChange={handleFileChange}
+        onConfirm={handleUploadConfirm}
       />
     )}
       <div className="navbar-left flex align-center">
