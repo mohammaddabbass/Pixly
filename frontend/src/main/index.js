@@ -110,13 +110,35 @@ ipcMain.handle('get-saved-images', async () => {
     /\.(png|jpe?g|gif|bmp|webp)$/i.test(file)
   );
 
-  const fullBase64Images = imageFiles.map(file => {
+  const fullImageData = imageFiles.map(file => {
     const fullPath = path.join(folderPath, file);
+    const stats = fs.statSync(fullPath);
     const ext = path.extname(fullPath).slice(1);
     const imageBuffer = fs.readFileSync(fullPath);
     const base64 = imageBuffer.toString('base64');
-    return `data:image/${ext};base64,${base64}`;
+    const src = `data:image/${ext};base64,${base64}`;
+
+    return {
+      name: file,
+      path: fullPath,
+      src,
+      size: (stats.size / (1024 * 1024)).toFixed(2), // in MB
+      createdAt: stats.birthtime, // or stats.ctime
+    };
   });
 
-  return fullBase64Images;
+  return fullImageData;
+});
+
+
+ipcMain.handle('delete-image', async (event, fullPath) => {
+  try {
+    if (fs.existsSync(fullPath)) {
+      fs.unlinkSync(fullPath);
+      return { success: true };
+    }
+    return { success: false, error: 'File not found' };
+  } catch (err) {
+    return { success: false, error: err.message };
+  }
 });

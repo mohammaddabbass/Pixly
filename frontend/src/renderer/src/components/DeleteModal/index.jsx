@@ -18,7 +18,7 @@ const DeleteModal = ({ onClose, onConfirm }) => {
 
         <div className="modal-actions">
           <Button variant='cancel' buttonText={"Cancel"}onClick={onClose}/>
-          <Button variant='destructive' buttonText={"Delete"}/>
+          <Button variant='destructive' buttonText={"Delete"} onClick={onConfirm}/>
         </div>
       </div>
     </div>
