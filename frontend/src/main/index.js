@@ -97,3 +97,26 @@ ipcMain.on('save-image', (event, { name, buffer }) => {
 });
 
 
+ipcMain.handle('get-saved-images', async () => {
+  const folderPath = path.join(app.getPath('pictures'), 'Pixly');
+
+  if (!fs.existsSync(folderPath)) {
+    return [];
+  }
+
+  const files = fs.readdirSync(folderPath);
+
+  const imageFiles = files.filter(file =>
+    /\.(png|jpe?g|gif|bmp|webp)$/i.test(file)
+  );
+
+  const fullBase64Images = imageFiles.map(file => {
+    const fullPath = path.join(folderPath, file);
+    const ext = path.extname(fullPath).slice(1);
+    const imageBuffer = fs.readFileSync(fullPath);
+    const base64 = imageBuffer.toString('base64');
+    return `data:image/${ext};base64,${base64}`;
+  });
+
+  return fullBase64Images;
+});

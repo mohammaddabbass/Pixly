@@ -3,7 +3,7 @@ import { Trash2, Edit } from 'lucide-react'
 import './styles.css'
 import DeleteModal from '../DeleteModal'
 
-const ImageCard = () => {
+const ImageCard = ({src, index}) => {
   const [showDeleteModal, setShowDeleteModal] = useState(false)
 
   return (
@@ -18,7 +18,7 @@ const ImageCard = () => {
       )}{' '}
       <div className="image-card">
         <div className="card-header">
-          <img src="https://picsum.photos/400/300" alt="Uploaded content" className="card-image" />
+          <img src={src} alt="Uploaded content" className="card-image" />
           <div className="card-actions flex">
             <button className="action-btn delete-btn" onClick={()=> setShowDeleteModal(true)}>
               <Trash2 size={20} color="#ef4444" />
