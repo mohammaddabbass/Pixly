@@ -1,0 +1,14 @@
+
+
+.back-button{
+    position: absolute;
+    left: 3rem;
+    top: 3rem;
+    background-color: var(--color-primary);
+    color: var(--tertiary-color);
+    border-radius: 50%;
+    height: 3em;
+    width: 3rem;
+    padding: 0.3rem;
+    cursor:pointer ;
+}

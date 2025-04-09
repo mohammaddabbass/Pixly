@@ -1,6 +1,7 @@
 import Auth from "./pages/Auth"
 import { Route, Routes } from 'react-router-dom'
 import Home from "./pages/Home"
+import Edit from "./pages/Edit"
 
 
 function App() {
@@ -9,7 +10,7 @@ function App() {
   return (
     <>
           <Routes>
-          <Route path='/'  element={<Home/>}/>
+          <Route path='/'  element={<Edit/>}/>
           </Routes>
     </>
   )

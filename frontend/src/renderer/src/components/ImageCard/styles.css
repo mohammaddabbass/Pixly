@@ -29,11 +29,13 @@
   
   .card-actions {
     position: absolute;
+    padding: 0.2rem;
     top: 12px;
     right: 12px;
     gap: 0.5rem;
     opacity: 0;
     transition: opacity 0.2s ease;
+    overflow: hidden;
   }
   
   .image-card:hover .card-actions {
@@ -50,6 +52,8 @@
     cursor: pointer;
     transition: all 0.2s ease;
     padding: 0.75rem;
+    transform-origin: center;
+    will-change: transform;
   }
   
   .action-btn:hover {

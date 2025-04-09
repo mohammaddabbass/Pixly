@@ -1,0 +1,51 @@
+.edit-card {
+    width: 80vw;
+    height: 75vh;
+    background-color: var(--color-primary-bg);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-xl);
+    border: 1px solid var(--color-gray-light);
+}
+
+.image-edit {
+    width: 70%;
+    height: 100%;
+    background-color: var(--color-gray-light);
+}
+
+.edit-options {
+    width: 30%;
+    height: 100%;
+    padding: 1rem 2rem;
+
+}
+
+.edit-options h2 {
+    color: var(--color-primary);
+}
+
+.edit-buttons {
+    padding: 0rem 1rem;
+    gap: 1rem;
+    width: 100%;
+}
+.edit-buttons button {
+    width: 45%;
+}
+
+.rotate-buttons {
+    gap: 1rem;
+}
+
+.opacity-slider .input-field {
+    padding: unset;
+    height: unset;
+    margin-bottom: 0px;
+}
+
+.opacity-slider label {
+    margin: unset;
+}
+.opacity-slider .input-group {
+    margin-bottom: 0;
+}
