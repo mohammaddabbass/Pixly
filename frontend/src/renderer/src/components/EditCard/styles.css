@@ -36,3 +36,16 @@
 .rotate-buttons {
     gap: 1rem;
 }
+
+.opacity-slider .input-field {
+    padding: unset;
+    height: unset;
+    margin-bottom: 0px;
+}
+
+.opacity-slider label {
+    margin: unset;
+}
+.opacity-slider .input-group {
+    margin-bottom: 0;
+}
