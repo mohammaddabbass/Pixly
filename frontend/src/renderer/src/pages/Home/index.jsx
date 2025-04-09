@@ -1,15 +1,21 @@
 import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import './styles.css';
 import ImageCard from '../../components/ImageCard';
+import { setLoading, setImages, removeImage } from '../../../features/imageSlice';
+
 
 const Home = () => {
-  const [images, setImages] = useState([]);
+  const dispatch = useDispatch();
+  const images = useSelector((global) => global.imageSlice);
 
   const fetchImages = async () => {
-    const paths = await window.electronAPI.getSavedImages();
-    setImages(paths);
+    dispatch(setLoading());
+    const imageData = await window.electronAPI.getSavedImages();
+    console.log(imageData);
+    dispatch(setImages(imageData));
   };
 
   useEffect(() => {
@@ -17,14 +23,14 @@ const Home = () => {
   }, []);
 
   const handleDelete = async (imagePath) => {
-    console.log("hello")
     const res = await window.electronAPI.deleteImage(imagePath);
     if (res.success) {
-      fetchImages(); // refresh after deletion
+      dispatch(removeImage({ path: imagePath })); // Pass object with path property
     } else {
       console.error(res.error);
     }
   };
+
 
   return (
     <div className="page flex column">
