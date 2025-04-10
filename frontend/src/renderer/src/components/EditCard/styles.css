@@ -13,6 +13,10 @@
     background-color: var(--color-gray-light);
 }
 
+.image-edit img {
+    object-fit:contain;
+}
+
 .edit-options {
     width: 30%;
     height: 100%;
@@ -49,3 +53,79 @@
 .opacity-slider .input-group {
     margin-bottom: 0;
 }
+
+/* Add these to your existing styles.css */
+
+.contrast-slider .input-field,
+.brightness-slider .input-field {
+    padding: unset;
+    height: unset;
+    margin-bottom: 0px;
+}
+
+.contrast-slider label,
+.brightness-slider label {
+    margin: unset;
+}
+
+.contrast-slider .input-group,
+.brightness-slider .input-group {
+    margin-bottom: 0;
+}
+
+/* Ensure all range inputs look consistent */
+.input-group input[type="range"] {
+    width: 100%;
+    -webkit-appearance: none;
+    /* height: 0.5rem; */
+    background: var(--color-gray-light);
+    border-radius: var(--radius-sm);
+}
+
+.input-group input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    background: var(--color-primary);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+/* Add to your existing CSS */
+.crop-controls .input-group {
+    margin-bottom: 0.8rem;
+  }
+  
+.crop-controls .input-group input{
+    height: unset;
+  }
+  
+  .crop-controls label {
+    font-size: 0.9rem;
+    color: var(--color-gray);
+  }
+  
+  .saturation-slider .input-field {
+    padding: unset;
+    height: unset;
+    margin-bottom: 0px;
+  }
+  
+  .saturation-slider label {
+    margin: unset;
+  }
+  
+  .saturation-slider .input-group {
+    margin-bottom: 0;
+  }
+  
+  .ReactCrop__child-wrapper {
+    width: 100%;
+    height: 100%;
+  }
+  
+  .ReactCrop__crop-selection {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.5);
+    overflow-y: hidden;
+  }

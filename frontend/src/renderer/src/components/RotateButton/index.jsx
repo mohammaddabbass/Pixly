@@ -1,9 +1,9 @@
 import React from 'react';
 import './styles.css';
 
-const RotateButton = ({buttonText}) => {
+const RotateButton = ({buttonText, onClick}) => {
     return (
-        <button className='rotate-button'>
+        <button className='rotate-button' onClick={onClick}>
             {buttonText}
         </button>
     );

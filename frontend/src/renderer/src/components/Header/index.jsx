@@ -1,16 +1,16 @@
-// Navbar.jsx
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Aperture } from 'lucide-react';
 import './styles.css';
 import InputGroup from '../InputGroup';
 import Button from '../Button';
-import DeleteModal from '../DeleteModal';
 import UploadModal from '../UploadModal';
+import { useDispatch, useSelector } from 'react-redux';
+import { setLoading, setImages, addImage } from '../../../features/imageSlice';
 
-const Header = () => {
-  const [searchTerm, setSearchTerm] = useState('');
+const Header = ({ searchTerm, setSearchTerm }) => {
+  const dispatch = useDispatch();
   const [showUploadModal, setShowUploadModal] = useState(false);
-
+  const { images, loading } = useSelector((state) => state.images);  
   const [selectedFile, setSelectedFile] = useState(null);
 
   const handleFileChange = (event) => {
@@ -22,25 +22,50 @@ const Header = () => {
     }
   };
   
-  const handleUploadConfirm = () => {
-    if (selectedFile) {
-      const reader = new FileReader();
-  
-      reader.onload = function () {
-        const arrayBuffer = reader.result;
-  
-        window.electronAPI.saveImage({
+  const handleUploadConfirm = async () => {
+    if (!selectedFile) return;
+
+    const reader = new FileReader();
+    
+    reader.onload = async () => {
+      try {
+        const savedImage = await window.electronAPI.saveImage({
           name: selectedFile.name,
-          buffer: arrayBuffer
+          buffer: reader.result
         });
-  
+
+        dispatch(addImage(savedImage));
+
         setShowUploadModal(false);
         setSelectedFile(null);
-      };
-  
-      reader.readAsArrayBuffer(selectedFile); // 👈 this is the magic
-    }
+      } catch (err) {
+        console.error('Upload failed:', err);
+      }
+    };
+
+    reader.readAsArrayBuffer(selectedFile);
   };
+
+    const fetchImages = async () => {
+      dispatch(setLoading()); 
+      try {
+        const imageData = await window.electronAPI.getSavedImages();
+        console.log("Fetched images:", imageData);
+        dispatch(setImages(imageData));
+      } catch (error) {
+        console.error("Error fetching images:", error);
+      }
+    };
+  
+    useEffect(() => {
+      fetchImages();
+    }, [dispatch]);
+
+    const handleSearchChange = (e) => {
+      setSearchTerm(e.target.value.toLowerCase());
+    };
+  
+
 
   return (
     <nav className="navbar flex justify-between align-center">
@@ -58,7 +83,10 @@ const Header = () => {
       </div>
         <button className="nav-link">Home</button>
 
-        <InputGroup type={'text'} placeholder={"Search images..."}/>
+        <InputGroup type="text" 
+        placeholder="Search images..."
+        value={searchTerm}
+        onChange={handleSearchChange}/>
 
       <div className="navbar-right flex align-center">
         <Button buttonText={"Upload"} onClick={() => setShowUploadModal(true)}/>
