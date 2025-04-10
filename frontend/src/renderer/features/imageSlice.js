@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
     images: [], 
     loading: false,
+    selected: null,
 };
 
 export const imageSlice = createSlice({
@@ -52,9 +53,20 @@ export const imageSlice = createSlice({
 
         // Action to edit an image
         editImage: state => {},
+
+        // Action to select an image
+        selectImage: (state, action) => {
+          const selectedImage = action.payload;
+           
+          return {
+            ...state,
+            loading: false,
+            selected: selectedImage,
+          }
+        }
     }
 
 });
 
-export const { setLoading, setImages, addImage, removeImage, editImage } = imageSlice.actions;
+export const { setLoading, setImages, addImage, removeImage, editImage, selectImage } = imageSlice.actions;
 export default imageSlice.reducer;
