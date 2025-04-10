@@ -9,14 +9,11 @@ import { selectImage } from '../../../features/imageSlice';
 const ImageCard = ({ src, name, size, date, onDelete, image }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  // const {} = useSelector()
   const [showDeleteModal, setShowDeleteModal] = useState(false);
 
   const handleNavigation = () => {
-    console.log("navigated");
     navigate('/edit-image');
     dispatch(selectImage(image));
-    console.log("dispatched")
   }
 
   return (
