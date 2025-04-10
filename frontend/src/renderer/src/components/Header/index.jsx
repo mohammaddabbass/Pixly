@@ -6,11 +6,8 @@ import Button from '../Button';
 import UploadModal from '../UploadModal';
 import { useDispatch, useSelector } from 'react-redux';
 import { setLoading, setImages, addImage } from '../../../features/imageSlice';
-import { useNavigate } from 'react-router-dom';
-
 
 const Header = ({ searchTerm, setSearchTerm }) => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [showUploadModal, setShowUploadModal] = useState(false);
   const { images, loading } = useSelector((state) => state.images);  
@@ -84,7 +81,7 @@ const Header = ({ searchTerm, setSearchTerm }) => {
         <div className="logo">Pixly</div>
 
       </div>
-        <button className="nav-link" onClick={navigate('/')}>Home</button>
+        <button className="nav-link">Home</button>
 
         <InputGroup type="text" 
         placeholder="Search images..."

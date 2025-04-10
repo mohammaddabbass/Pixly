@@ -33,7 +33,6 @@ const Home = () => {
     }
   };
 
-
   const filteredImages = images.filter(image => 
     image.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
@@ -41,10 +40,11 @@ const Home = () => {
 
   return (
     <div className="page flex column">
-      <Header Header searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+      <Header searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
       <div className="page-content image-gallery">
         {filteredImages?.map((img, idx) => (
           <ImageCard
+          image={img}
             key={idx}
             src={img.src}
             name={img.name}

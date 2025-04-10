@@ -6,12 +6,16 @@ import { RotateCcw, RotateCw } from 'lucide-react'
 import ToggleButton from '../toggleButton'
 import InputGroup from '../InputGroup'
 import SelectGroup from '../SelectGroup'
+import { useSelector } from 'react-redux'
 
 const EditCard = () => {
+  const {selected} = useSelector((state) => state.images);
+
+  console.log(selected)
   return (
     <div className="edit-card flex ">
       <div className="image-edit">
-        <img src="https://picsum.photos/400/300" alt="Uploaded content" className="card-image" />
+        <img src={selected.src} alt="Uploaded content" className="card-image" />
       </div>
       <div className="edit-options flex column justify-evenly">
         <h2>Edit</h2>

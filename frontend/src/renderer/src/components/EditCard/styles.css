@@ -13,6 +13,10 @@
     background-color: var(--color-gray-light);
 }
 
+.image-edit img {
+    object-fit:contain;
+}
+
 .edit-options {
     width: 30%;
     height: 100%;
@@ -48,4 +52,7 @@
 }
 .opacity-slider .input-group {
     margin-bottom: 0;
+}
+
+.card-image {
 }
