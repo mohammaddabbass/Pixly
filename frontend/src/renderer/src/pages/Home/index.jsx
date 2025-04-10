@@ -9,7 +9,7 @@ import { setLoading, setImages, removeImage } from '../../../features/imageSlice
 
 const Home = () => {
   const dispatch = useDispatch();
-  const { images } = useSelector((state) => state.images);
+  const { images, loading } = useSelector((state) => state.images);
   const [searchTerm, setSearchTerm] = useState('');
 
   const fetchImages = async () => {

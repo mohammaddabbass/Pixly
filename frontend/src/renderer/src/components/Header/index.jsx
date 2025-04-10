@@ -13,7 +13,7 @@ const Header = ({ searchTerm, setSearchTerm }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [showUploadModal, setShowUploadModal] = useState(false);
-  const { images, loading } = useSelector((state) => state.images);  // ensure you use the correct key
+  const { images, loading } = useSelector((state) => state.images);  
   const [selectedFile, setSelectedFile] = useState(null);
 
   const handleFileChange = (event) => {
