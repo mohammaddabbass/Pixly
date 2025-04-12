@@ -52,7 +52,14 @@ export const imageSlice = createSlice({
         },
 
         // Action to edit an image
-        editImage: state => {},
+        editImage: (state, action) => {
+          const newImage = action.payload;
+          return {
+            ...state,
+            images: [newImage, ...state.images],
+            selected: newImage
+          };
+        },
 
         // Action to select an image
         selectImage: (state, action) => {
