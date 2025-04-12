@@ -1,6 +1,6 @@
 import { useState } from "react";
-// import { requestMethods } from "../../utils/enums/request.methods";
-// import { request } from "../../utils/remote/axios";
+import { requestMethods } from "../../utils/enums/request.methods";
+import { request } from "../../utils/remote/axios";
 const useAuth = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
