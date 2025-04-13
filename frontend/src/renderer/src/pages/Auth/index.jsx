@@ -18,11 +18,11 @@ const Auth = () => {
     }
   };
 
-  // useEffect(()=> {
-  //   if(user && token) {
-  //       navigate('/dashboard');
-  //   }
-  // }, [user, token, navigate])
+  useEffect(()=> {
+    if(user && token) {
+        navigate('/home');
+    }
+  }, [user, token, navigate])
 
   return (
     <div className="auth-page flex column justify-center align-center">
