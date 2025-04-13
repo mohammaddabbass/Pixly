@@ -10,8 +10,8 @@ function App() {
   return (
     <>
           <Routes>
-            <Route path="/auth" element={<Auth/>}/>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<Auth/>}/>
+            <Route path="/home" element={<Home />} />
             <Route path="/edit-image" element={<Edit />} />
           </Routes>
     </>
