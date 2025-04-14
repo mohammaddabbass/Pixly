@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\LoginRequest;
+use App\Http\Requests\RegisterRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -10,14 +12,8 @@ use Laravel\Passport\Client;
 
 class AuthController extends Controller
 {
-    public function register(Request $request)
+    public function register(RegisterRequest $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6',
-        ]);
-    
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
@@ -37,19 +33,15 @@ class AuthController extends Controller
         ], 201);
     }
 
-    public function login(Request $request)
+    public function login(LoginRequest $request)
     {
-        $request->validate([
-            'email' => 'required|string|email',
-            'password' => 'required|string',
-        ]);
-
         if (!Auth::attempt($request->only('email', 'password'))) {
             return response()->json([
                 'status' => 'error',
                 'message' => 'Unauthorized',
             ], 401);
         }
+
 
         $user = Auth::user();
         /** @var \App\Models\User $user */
