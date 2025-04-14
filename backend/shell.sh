@@ -3,7 +3,7 @@
 echo "Running Laravel setup..."
 
 composer install || echo "Composer failed but continuing..."
-php artisan migrate || echo "Migration failed but continuing..."
+php artisan migrate --force || echo "Migration failed but continuing..."
 
 # php artisan passport:install
 php artisan passport:client --personal
