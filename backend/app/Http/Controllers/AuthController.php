@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 use Laravel\Passport\Client;
 
 class AuthController extends Controller
@@ -89,7 +91,22 @@ class AuthController extends Controller
                 'geolocation' => $geolocation ? json_encode($geolocation) : null
             ]);
         } catch (\Exception $e) {
-            \Log::error('Login logging failed: '.$e->getMessage());
+            Log::error('Login logging failed: '.$e->getMessage());
+        }
+    }
+
+
+    private function getGeolocationData($ip)
+    {
+        try {
+            $response = Http::get("https://ipinfo.io/{$ip}/json", [
+                'token' => env('IPINFO_TOKEN')
+            ]);
+
+            return $response->successful() ? $response->json() : null;
+        } catch (\Exception $e) {
+            Log::error('Geolocation lookup failed: '.$e->getMessage());
+            return null;
         }
     }
 }
