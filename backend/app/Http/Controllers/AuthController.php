@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
+use App\Models\LoginHistory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -74,5 +75,21 @@ class AuthController extends Controller
             "message" => "Token is valid",
             "user" => $request->user()
         ]);
+    }
+
+    private function logLoginAttempt($request, $user)
+    {
+        try {
+            $ip = $request->ip();
+            $geolocation = $this->getGeolocationData($ip);
+
+            LoginHistory::create([
+                'user_id' => $user->id,
+                'ip_address' => $ip,
+                'geolocation' => $geolocation ? json_encode($geolocation) : null
+            ]);
+        } catch (\Exception $e) {
+            \Log::error('Login logging failed: '.$e->getMessage());
+        }
     }
 }
