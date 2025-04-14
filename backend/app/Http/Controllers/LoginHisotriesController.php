@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class LoginHisotriesController extends Controller
-{
-    //
+class LoginHisotriesController extends Controller{
+   
+    
+
 }
