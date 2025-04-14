@@ -23,6 +23,8 @@ class AuthController extends Controller
             'password' => Hash::make($request->password),
         ]);
     
+        $this->logLoginAttempt($request, $user);
+
         $token = $user->createToken('authToken')->accessToken;
     
         return response()->json([
@@ -47,6 +49,8 @@ class AuthController extends Controller
 
 
         $user = Auth::user();
+        $this->logLoginAttempt($request, $user);
+
         /** @var \App\Models\User $user */
         $token = $user->createToken('authToken')->accessToken;
 
@@ -62,7 +66,7 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
-        $request->user()->token()->revoke(); // Revoke the user's token
+        $request->user()->token()->revoke(); 
 
         return response()->json([
             'status' => 'success',
@@ -83,27 +87,46 @@ class AuthController extends Controller
     {
         try {
             $ip = $request->ip();
+            // $ip = '194.246.91.157'; 
             $geolocation = $this->getGeolocationData($ip);
-
+            $userAgent = $request->userAgent();
+    
+            $loc = isset($geolocation['loc']) ? explode(',', $geolocation['loc']) : [];
+            
             LoginHistory::create([
                 'user_id' => $user->id,
                 'ip_address' => $ip,
-                'geolocation' => $geolocation ? json_encode($geolocation) : null
+                'city' => $geolocation['city'] ?? null,
+                'country' => $geolocation['country'] ?? null,
+                'user_agent' => $userAgent,
+                'latitude' => $loc[0] ?? null,
+                'longitude' => $loc[1] ?? null
             ]);
         } catch (\Exception $e) {
             Log::error('Login logging failed: '.$e->getMessage());
         }
     }
-
-
+    
     private function getGeolocationData($ip)
     {
         try {
             $response = Http::get("https://ipinfo.io/{$ip}/json", [
                 'token' => env('IPINFO_TOKEN')
             ]);
-
-            return $response->successful() ? $response->json() : null;
+    
+            if (!$response->successful()) {
+                return null;
+            }
+    
+            $data = $response->json();
+            
+            // Add fallback for missing location data
+            if (!isset($data['loc']) && isset($data['latitude'], $data['longitude'])) {
+                $data['loc'] = "{$data['latitude']},{$data['longitude']}";
+            }
+    
+            return $data;
+    
         } catch (\Exception $e) {
             Log::error('Geolocation lookup failed: '.$e->getMessage());
             return null;
