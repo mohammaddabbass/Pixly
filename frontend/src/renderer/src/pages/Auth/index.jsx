@@ -3,6 +3,7 @@ import Form from '../../components/Form';
 import './styles.css';
 import useAuth from './useAuth';
 import { useNavigate } from "react-router-dom";
+import ChatButton from '../../components/ChatButton';
 
 
 const Auth = () => {
@@ -26,6 +27,7 @@ const Auth = () => {
 
   return (
     <div className="auth-page flex column justify-center align-center">
+      <ChatButton/>
       <h1 className='title'>Pixly</h1>
       <Form
         isLogin={isLoginForm}
