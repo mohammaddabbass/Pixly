@@ -11,6 +11,7 @@ Route::group(["prefix" => "v0.1"], function() {
 
             Route::get('/validate-token', [AuthController::class, 'validateToken']);
             Route::post('/save-message', [MessageController::class, 'saveMessage']);
+            Route::get('/get-messages', [MessageController::class, 'getAll']);
 
         });
     }); 
