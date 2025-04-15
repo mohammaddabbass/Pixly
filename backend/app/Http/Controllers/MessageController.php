@@ -27,4 +27,8 @@ class MessageController extends Controller
             ]
         ], 201);
     }
+
+    public function getAll() {
+        return Message::with('user')->latest()->take(50)->get();
+    }
 }
