@@ -2,6 +2,7 @@ import Auth from "./pages/Auth"
 import { Route, Routes } from 'react-router-dom'
 import Home from "./pages/Home"
 import Edit from "./pages/Edit"
+import Chats from "./pages/Chats"
 
 
 function App() {
@@ -10,8 +11,9 @@ function App() {
   return (
     <>
           <Routes>
-            <Route path="/" element={<Auth/>}/>
-            <Route path="/home" element={<Home />} />
+            <Route path="/a" element={<Auth/>}/>
+            <Route path="/" element={<Home />} />
+            <Route path="/chats" element={<Chats />} />
             <Route path="/edit-image" element={<Edit />} />
           </Routes>
     </>
