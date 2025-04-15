@@ -7,11 +7,9 @@
     position: fixed;
     width: 80vw;
     height: 80vh;
-    background-color: white;
-    border-radius: 16px;
+    background-color: var(--color-primary-bg);
+    border-radius: var(--border-lg);
     box-shadow: var(--shadow-sm);
-    display: flex;
-    flex-direction: column;
     z-index: 999;
   }
   
@@ -47,12 +45,8 @@
   .send-button {
     padding: 0.5rem 1rem;
     background-color: var(--color-primary);
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
+    color: var(--color-primary-bg);
+    border-radius: var(--radius-sm);
     gap: 0.25rem;
   }
   
@@ -60,7 +54,7 @@
     max-width: 80%;
     padding: 0.75rem;
     margin-bottom: 0.5rem;
-    border-radius: 12px;
+    border-radius: var(--radius-md);
     background-color: #f1f1f1;
   }
   
@@ -68,4 +62,13 @@
     background-color: var(--color-primary);
     color: white;
     margin-left: auto;
+  }
+
+  .message-sender {
+    font-weight: bold;
+  }
+
+  .message-time {
+    font-size: 12px;
+    color: var(--color-gray);
   }

@@ -11,8 +11,8 @@ function App() {
   return (
     <>
           <Routes>
-            <Route path="/a" element={<Auth/>}/>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<Auth/>}/>
+            <Route path="/home" element={<Home />} />
             <Route path="/chats" element={<Chats />} />
             <Route path="/edit-image" element={<Edit />} />
           </Routes>
