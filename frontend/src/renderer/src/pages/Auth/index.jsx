@@ -4,7 +4,6 @@ import './styles.css';
 import useAuth from './useAuth';
 import { useNavigate } from "react-router-dom";
 
-
 const Auth = () => {
   const { user, login, signUp, isLoading, error, token } = useAuth();
   const [isLoginForm, setIsLoginForm] = useState(true);

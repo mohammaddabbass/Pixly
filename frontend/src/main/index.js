@@ -16,7 +16,16 @@ function createWindow() {
     ...(process.platform === 'linux' ? { icon } : {}),
     webPreferences: {
       preload: join(__dirname, '../preload/index.js'),
-      sandbox: false
+      sandbox: false,
+      nodeIntegration: true,
+      contextIsolation: true,
+      contentSecurityPolicy: `
+        default-src 'self';
+        connect-src 'self' http://localhost:8000 ws://localhost:3001;
+        style-src 'self' 'unsafe-inline';
+        img-src 'self' data:;
+        script-src 'self';
+      `
     }
   })
 

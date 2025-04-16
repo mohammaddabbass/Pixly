@@ -5,6 +5,7 @@ import Footer from '../../components/Footer';
 import './styles.css';
 import ImageCard from '../../components/ImageCard';
 import { setLoading, setImages, removeImage } from '../../../features/imageSlice';
+import ChatButton from '../../components/ChatButton';
 
 
 const Home = () => {
@@ -40,6 +41,7 @@ const Home = () => {
 
   return (
     <div className="page flex column">
+      <ChatButton/>
       <Header searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
       <div className="page-content image-gallery">
         {filteredImages?.map((img, idx) => (
