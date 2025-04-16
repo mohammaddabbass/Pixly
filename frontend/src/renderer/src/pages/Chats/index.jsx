@@ -111,7 +111,7 @@ const Chats = () => {
               </div>
             </div>
           ))}
-          <div ref={bottomRef} /> {/* 👈 Always scrolls to here */}
+          <div ref={bottomRef} />
         </div>
         <div className="message-input-container">
           <input
